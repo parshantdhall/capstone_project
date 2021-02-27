@@ -1,0 +1,2 @@
+get a single user = https://uclearn.canberra.edu.au/api/v1/users/:user-id/profile
+get all users related to capstone project = https://uclearn.canberra.edu.au/api/v1/courses/10093/users?per_page=200&include%5B%5D=enrollments
