@@ -5,22 +5,27 @@ import {
   Button,
   Heading,
   Spacer,
-  Text,
-  HStack,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 import { Link, useHistory } from "react-router-dom";
 import { userContext } from "./context provider/Context";
+import { FaArrowAltCircleDown } from "react-icons/fa";
 
 const Navbar = () => {
   const globalUserData = useContext(userContext);
   const history = useHistory();
 
+  // log out function
   const handleLogOut = () => {
     // removing user from global state and local storate
     globalUserData.updateGlobalUserData({});
     window && window.sessionStorage.clear();
     history.push("/login");
   };
+
   return (
     <Box p={3} width="100%" backgroundColor="gray.50" boxShadow="md" mb={3}>
       <Flex justifyContent="center">
@@ -29,14 +34,17 @@ const Navbar = () => {
         </Box>
         <Spacer />
         {globalUserData.userData && globalUserData.userData.isLoggedIn ? (
-          <HStack>
-            <Text as="p" display="block" role="userName">
+          <Menu>
+            <MenuButton as={Button} right={<FaArrowAltCircleDown />}>
+              {" "}
               Hi! {globalUserData.userData.username}
-            </Text>
-            <Button colorScheme="red" onClick={handleLogOut}>
-              Log out
-            </Button>
-          </HStack>
+            </MenuButton>
+            <MenuList>
+              <MenuItem backgroundColor="red.300" onClick={handleLogOut}>
+                LogOut
+              </MenuItem>
+            </MenuList>
+          </Menu>
         ) : (
           <Box>
             <Link to="/register">

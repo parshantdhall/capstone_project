@@ -12,6 +12,7 @@ import {
   InputLeftAddon,
   InputRightAddon,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
@@ -19,8 +20,11 @@ import { FaUserCircle, FaKey } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
 import { api_register } from "../../lib/api_routes";
 import { userContext } from "../context provider/Context";
+import CustomAlert from "../reusable components/CustomAlert";
+import { validateRegister } from "../../lib/formValidation";
 
 const Register = () => {
+  // -----------Local State------------------
   const [userData, setUserData] = useState({
     first_name: "",
     last_name: "",
@@ -28,25 +32,49 @@ const Register = () => {
     password: "",
   });
 
+  const [error, setError] = useState({
+    isShowing: false,
+    title: "",
+  });
+
+  // ------------Glocal var-----------------
   // HIstory var from react router
   const history = useHistory();
   const globalUserState = useContext(userContext);
+  const toast = useToast();
 
+  // -------------Local Function------------
   const handleChange = (e) => {
     setUserData((preState) => ({
       ...preState,
       [e.target.name]: e.target.value,
     }));
+    // setting error back to normal
+    setError({
+      isShowing: false,
+      title: "",
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Form validation
+    const { isError, message } = validateRegister(userData);
+    if (isError) {
+      setError({
+        isShowing: isError,
+        title: message,
+      });
+      return;
+    }
+
     try {
+      // fetcing
       const res = await axios.post(api_register.url, {
         ...userData,
-        identifier: "u" + userData.identifier + "@uni.canberra.edu.au",
+        email: "u" + userData.email + "@uni.canberra.edu.au",
+        username: userData.first_name + " " + userData.last_name,
       });
-      console.log(res);
       const { data } = res;
 
       // If everything gone well
@@ -54,28 +82,65 @@ const Register = () => {
         // setting the jwt token in local storage for sign in
         window && window.sessionStorage.clear();
         window && window.sessionStorage.setItem("token", data && data.jwt);
-        // setting user id in session storage
-        window && window.sessionStorage.setItem("uid", data && data.user.id);
+        // setting user info in session storage
+        window &&
+          window.sessionStorage.setItem(
+            "uInfo",
+            data &&
+              JSON.stringify({
+                confirmed: data.user.confirmed,
+                username: data.user.username,
+                role: { name: data.user.role.name },
+              })
+          );
 
         // setting global userState
         globalUserState.updateGlobalUserData({
           ...data.user,
           isLoggedIn: true,
         });
+
+        // reseting local state
         setUserData({
           first_name: "",
           last_name: "",
           email: "",
           password: "",
         });
+        // redirecting
         history.push("/");
+
+        // SHowing the toas after sucessful login
+        toast({
+          title: "Account created.",
+          description: `Welcome ${data.user.username}`,
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
       }
     } catch (err) {
-      console.dir(err.response.data.data[0].messages[0].message);
+      const errorTitle =
+        err.response && err.response.data
+          ? err.response.data.data[0].messages[0].message
+          : err.message;
+      setError({
+        isShowing: true,
+        title: errorTitle,
+      });
     }
   };
   return (
     <Center flexDirection="column">
+      {/* Configuring the alert */}
+      {error.isShowing ? (
+        <CustomAlert type="error" alertTitle={error.title} />
+      ) : (
+        ""
+      )}
+
+      {/* Rest of the components */}
+
       <Stack spacing={4} p={2}>
         <Box>
           <Heading as="h1">Register Capstone Project User</Heading>

@@ -12,12 +12,14 @@ import {
   InputLeftAddon,
   InputRightAddon,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { FaKey } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
 import { api_login } from "../../lib/api_routes";
 import { userContext } from "../context provider/Context";
+import CustomAlert from "../reusable components/CustomAlert";
 
 const Login = () => {
   // ----------------All the local state--------
@@ -26,16 +28,28 @@ const Login = () => {
     password: "",
   });
 
+  const [error, setError] = useState({
+    isShowing: false,
+    title: "",
+  });
+
   // ------------------- All the global vars -------
   const history = useHistory();
 
   const globalUserState = useContext(userContext);
+  const toast = useToast();
   // ---------All the local functions------------
   const handleChange = (e) => {
     setUserData((preState) => ({
       ...preState,
       [e.target.name]: e.target.value,
     }));
+
+    // setting error back to normal
+    setError({
+      isShowing: false,
+      title: "",
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -45,35 +59,75 @@ const Login = () => {
         ...userData,
         identifier: "u" + userData.identifier + "@uni.canberra.edu.au",
       });
-      console.log(res);
       const { data } = res;
 
       // If everything gone well
       if (res.statusText === "OK") {
-        // setting the jwt token in local storage for sign in
-        window && window.sessionStorage.clear();
-        window && window.sessionStorage.setItem("token", data && data.jwt);
-        // setting user id in session storage
-        window && window.sessionStorage.setItem("uid", data && data.user.id);
+        // check if user is confirmed or not
+        if (res.data.user && res.data.user.confirmed === true) {
+          // setting the jwt token in local storage for sign in
+          window && window.sessionStorage.clear();
+          window && window.sessionStorage.setItem("token", data && data.jwt);
+          // setting user info in session storage
+          window &&
+            window.sessionStorage.setItem(
+              "uInfo",
+              data &&
+                JSON.stringify({
+                  confirmed: data.user.confirmed,
+                  username: data.user.username,
+                  role: { name: data.user.role.name },
+                })
+            );
 
-        // setting global userState
-        globalUserState.updateGlobalUserData({
-          ...data.user,
-          isLoggedIn: true,
-        });
-        setUserData({
-          email: "",
-          password: "",
-        });
-        history.push("/");
+          // setting global userState
+          globalUserState.updateGlobalUserData({
+            ...data.user,
+            isLoggedIn: true,
+          });
+
+          // resetting the local state
+          setUserData({
+            email: "",
+            password: "",
+          });
+          // redirecting
+          history.push("/");
+
+          // SHowing the toas after sucessful login
+          toast({
+            title: "Login Sucessful",
+            description: `Welcome ${data.user.username}`,
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+        } else {
+          throw new Error("User Not Confirmed");
+        }
       }
     } catch (err) {
-      console.dir(err.response.data.data[0].messages[0].message);
+      const errorTitle =
+        err.response && err.response.data
+          ? err.response.data.data[0].messages[0].message
+          : err.message;
+      setError({
+        isShowing: true,
+        title: errorTitle,
+      });
     }
   };
 
   return (
     <Center flexDirection="column">
+      {/* Configuring the alert */}
+      {error.isShowing ? (
+        <CustomAlert type="error" alertTitle={error.title} />
+      ) : (
+        ""
+      )}
+
+      {/* Rest of the components */}
       <Stack spacing={4} p={2}>
         <Box>
           <Heading as="h1">Login to your Capstone Project account</Heading>

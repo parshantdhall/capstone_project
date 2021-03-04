@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "project_forms",
+  "info": {
+    "name": "Project Form"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "project_title": {
+      "type": "string",
+      "required": true
+    },
+    "project_description": {
+      "type": "text",
+      "required": true
+    },
+    "number_of_groups_allowed": {
+      "type": "integer",
+      "required": true
+    },
+    "number_of_students_allowed": {
+      "type": "integer",
+      "required": true
+    },
+    "project_file": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

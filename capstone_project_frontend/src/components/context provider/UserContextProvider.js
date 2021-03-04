@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import { useEffect, useState } from "react";
 import isAuthenticated from "../../lib/isAuthenticated";
 import { userContext } from "./Context";
@@ -12,7 +12,12 @@ const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated()) {
-      setUserData((prevState) => ({ ...prevState, isLoggedIn: true }));
+      const userData = JSON.parse(window.sessionStorage.getItem("uInfo"));
+      setUserData((prevState) => ({
+        ...prevState,
+        ...userData,
+        isLoggedIn: true,
+      }));
       // axios.get()
     } else {
       setUserData((prevState) => ({ ...prevState, isLoggedIn: false }));
