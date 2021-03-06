@@ -91,6 +91,7 @@ const Register = () => {
                 confirmed: data.user.confirmed,
                 username: data.user.username,
                 role: { name: data.user.role.name },
+                id: data.user.id,
               })
           );
 
@@ -115,7 +116,7 @@ const Register = () => {
           title: "Account created.",
           description: `Welcome ${data.user.username}`,
           status: "success",
-          duration: 9000,
+          duration: 5000,
           isClosable: true,
         });
       }

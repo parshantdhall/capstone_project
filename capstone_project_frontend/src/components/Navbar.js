@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Link, useHistory } from "react-router-dom";
 import { userContext } from "./context provider/Context";
-import { FaArrowAltCircleDown } from "react-icons/fa";
+import { FaAngleDown } from "react-icons/fa";
 
 const Navbar = () => {
   const globalUserData = useContext(userContext);
@@ -35,14 +35,12 @@ const Navbar = () => {
         <Spacer />
         {globalUserData.userData && globalUserData.userData.isLoggedIn ? (
           <Menu>
-            <MenuButton as={Button} right={<FaArrowAltCircleDown />}>
+            <MenuButton as={Button} rightIcon={<FaAngleDown />}>
               {" "}
-              Hi! {globalUserData.userData.username}
+              Yo {globalUserData.userData.username}
             </MenuButton>
             <MenuList>
-              <MenuItem backgroundColor="red.300" onClick={handleLogOut}>
-                LogOut
-              </MenuItem>
+              <MenuItem onClick={handleLogOut}>LogOut</MenuItem>
             </MenuList>
           </Menu>
         ) : (

@@ -13,9 +13,11 @@ import {
   InputRightAddon,
   Text,
   useToast,
+  Switch,
+  HStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { FaKey } from "react-icons/fa";
+import { FaEnvelope, FaKey } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
 import { api_login } from "../../lib/api_routes";
 import { userContext } from "../context provider/Context";
@@ -32,6 +34,8 @@ const Login = () => {
     isShowing: false,
     title: "",
   });
+
+  const [isSponser, setIsSponser] = useState(false);
 
   // ------------------- All the global vars -------
   const history = useHistory();
@@ -52,12 +56,16 @@ const Login = () => {
     });
   };
 
+  // Handling form submition
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const identifier = !isSponser
+      ? "u" + userData.identifier + "@uni.canberra.edu.au"
+      : userData.identifier;
     try {
       const res = await axios.post(api_login.url, {
         ...userData,
-        identifier: "u" + userData.identifier + "@uni.canberra.edu.au",
+        identifier,
       });
       const { data } = res;
 
@@ -77,6 +85,7 @@ const Login = () => {
                   confirmed: data.user.confirmed,
                   username: data.user.username,
                   role: { name: data.user.role.name },
+                  id: data.user.id,
                 })
             );
 
@@ -99,7 +108,7 @@ const Login = () => {
             title: "Login Sucessful",
             description: `Welcome ${data.user.username}`,
             status: "success",
-            duration: 9000,
+            duration: 5000,
             isClosable: true,
           });
         } else {
@@ -118,6 +127,9 @@ const Login = () => {
     }
   };
 
+  const handleIsSponser = () => {
+    setIsSponser((prevState) => !prevState);
+  };
   return (
     <Center flexDirection="column">
       {/* Configuring the alert */}
@@ -139,21 +151,51 @@ const Login = () => {
           maxW="460px"
           style={{ margin: "0 auto" }}
         >
-          <Stack spacing={3}>
-            <InputGroup>
-              <InputLeftAddon children="u" />
-              <Input
-                type="text"
-                required
-                value={userData.identifier}
-                onChange={(e) => {
-                  handleChange(e);
-                }}
-                placeholder="UC Student ID"
-                name="identifier"
-              />
-              <InputRightAddon children="@uni.canberra.edu.au" />
-            </InputGroup>
+          <Stack spacing={3} pos="relative">
+            {isSponser ? (
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  children={<FaEnvelope />}
+                />
+                <Input
+                  type="email"
+                  required
+                  value={userData.identifier}
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                  placeholder="Sponser Email"
+                  name="identifier"
+                />
+              </InputGroup>
+            ) : (
+              <InputGroup>
+                <InputLeftAddon children="u" />
+                <Input
+                  type="text"
+                  required
+                  value={userData.identifier}
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                  placeholder="UC Student ID"
+                  name="identifier"
+                />
+                <InputRightAddon children="@uni.canberra.edu.au" />
+              </InputGroup>
+            )}
+            {/* Login as sponser or student */}
+            <HStack
+              fontSize="sm"
+              spacing="5px"
+              justifyContent="flex-end"
+              w="100%"
+            >
+              <Text as="p">Login as {!isSponser ? "Sponser" : "Student"}?</Text>
+              <Switch onChange={handleIsSponser} />
+            </HStack>
+            {/* ------------Password---------- */}
             <InputGroup>
               <InputLeftElement pointerEvents="none" children={<FaKey />} />
               <Input
@@ -163,7 +205,7 @@ const Login = () => {
                 onChange={(e) => {
                   handleChange(e);
                 }}
-                placeholder="password of your chioce"
+                placeholder="password "
                 name="password"
               />
             </InputGroup>

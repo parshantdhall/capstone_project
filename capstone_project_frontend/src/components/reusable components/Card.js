@@ -18,19 +18,13 @@ const Card = ({ pTitle, pDescription, pid, studentAllowed, groupAllowed }) => {
         {/* card header */}
         <Box as="header">
           <Heading as="h2" fontSize="xl">
-            Project Title
+            {pTitle}
           </Heading>
         </Box>
         {/* card content */}
         <Box>
           <Text as="p" fontSize="sm">
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of letters, as opposed to using 'Content here, content
-            here', making it look like readable English. Many desktop publishing
-            packages and web page editors now use Lorem Ipsum as their default
-            model text, and a search for 'lor
+            {pDescription}
           </Text>
         </Box>
         {/* card footer */}
@@ -42,29 +36,17 @@ const Card = ({ pTitle, pDescription, pid, studentAllowed, groupAllowed }) => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <VStack>
-            <Text as="p" fontSize="sm">
-              Id
-            </Text>
-            <Text as="p" fontSize="sm">
-              5
-            </Text>
+          <VStack fontSize="xs">
+            <Text as="p">Id</Text>
+            <Text as="p">{pid}</Text>
           </VStack>
-          <VStack>
-            <Text as="p" fontSize="sm">
-              Students allowed
-            </Text>
-            <Text as="p" fontSize="sm">
-              3
-            </Text>
+          <VStack fontSize="xs">
+            <Text as="p">Students allowed</Text>
+            <Text as="p">{studentAllowed}</Text>
           </VStack>
-          <VStack>
-            <Text as="p" fontSize="sm">
-              Groups allowed
-            </Text>
-            <Text as="p" fontSize="sm">
-              2
-            </Text>
+          <VStack fontSize="xs">
+            <Text as="p">Groups allowed</Text>
+            <Text as="p">{groupAllowed}</Text>
           </VStack>
         </Box>
       </VStack>

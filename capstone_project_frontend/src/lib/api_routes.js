@@ -7,3 +7,18 @@ export const api_login = {
   url: "http://localhost:1337/auth/local",
   method: "POST",
 };
+
+export const file_upload = {
+  url: "http://localhost:1337/upload",
+  method: "POST",
+};
+
+export const create_project_form = {
+  url: "http://localhost:1337/project-forms",
+  method: "POST",
+};
+
+export const get_project_form = {
+  url: "http://localhost:1337/project-forms",
+  method: "GET",
+};

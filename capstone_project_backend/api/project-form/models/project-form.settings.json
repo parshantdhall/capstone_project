@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "project_forms",
   "info": {
-    "name": "Project Form"
+    "name": "Project Form",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -34,6 +35,11 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "user": {
+      "via": "project_forms",
+      "plugin": "users-permissions",
+      "model": "user"
     }
   }
 }

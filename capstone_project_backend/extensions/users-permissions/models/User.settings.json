@@ -66,6 +66,10 @@
     "last_name": {
       "type": "string",
       "required": true
+    },
+    "project_forms": {
+      "collection": "project-form",
+      "via": "user"
     }
   }
 }

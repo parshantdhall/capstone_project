@@ -6,15 +6,11 @@ import StudentDash from "./components/student/StudentDash";
 function Home() {
   const globalStateData = useContext(userContext);
 
+  const currentUserRoleSponser =
+    globalStateData.userData.role &&
+    globalStateData.userData.role.name === "Sponser";
   return (
-    <main>
-      {globalStateData.userData.role &&
-      globalStateData.userData.role.name === "Sponser" ? (
-        <SponserDash />
-      ) : (
-        <StudentDash />
-      )}
-    </main>
+    <main>{currentUserRoleSponser ? <SponserDash /> : <StudentDash />}</main>
   );
 }
 
