@@ -109,7 +109,7 @@ const Register = () => {
           password: "",
         });
         // redirecting
-        history.push("/");
+        history.replace("/");
 
         // SHowing the toas after sucessful login
         toast({

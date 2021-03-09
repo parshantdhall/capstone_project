@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "student_groups",
+  "info": {
+    "name": "student group",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "group_members": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "student_group"
+    },
+    "is_project_priorities_submitted": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    "project_priorities": {
+      "collection": "project-form",
+      "via": "student_groups_priorities",
+      "dominant": true
+    },
+    "is_project_allocated": {
+      "type": "boolean",
+      "default": false
+    },
+    "project_allocated": {
+      "model": "project-form",
+      "via": "allocated_student_groups"
+    }
+  }
+}

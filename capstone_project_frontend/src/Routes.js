@@ -7,6 +7,7 @@ const Routes = () => {
   return (
     <UserContextProvider>
       <Navbar />
+
       {/* All route stuff */}
       <Switch>
         <RenderRoute />

@@ -4,6 +4,7 @@ import {
   Heading,
   IconButton,
   SimpleGrid,
+  Spinner,
   Text,
   Tooltip,
   useDisclosure,
@@ -19,12 +20,15 @@ import { userContext } from "../context provider/Context";
 const SponserDash = () => {
   // local state
   const [allProjectData, setAllProjectData] = useState([]);
+  const [isLoading, setIsloading] = useState(false);
+
   // ----GLobal var---------
   const globalStateData = useContext(userContext);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
+    setIsloading(true);
     axios
       .get(
         `${get_project_form.url}?user.id=${
@@ -41,6 +45,7 @@ const SponserDash = () => {
       )
       .then((res) => {
         setAllProjectData(res.data);
+        setIsloading(false);
       })
       .catch((err) => console.dir(err));
   }, [globalStateData.userData.id]);
@@ -53,30 +58,38 @@ const SponserDash = () => {
   };
   return (
     <Box as="section" p={3}>
-      <Center>
-        <Heading as="h1"> Sponser Dashboard</Heading>
-      </Center>
-      <SimpleGrid minChildWidth="250px" spacing="40px" mt={2}>
-        {/* card */}
-        {allProjectData.length > 0 ? (
-          allProjectData.map((project) => (
-            <Card
-              key={project.id}
-              pTitle={project.project_title}
-              pDescription={project.project_description}
-              pid={project.id}
-              studentAllowed={project.number_of_students_allowed}
-              groupAllowed={project.number_of_groups_allowed}
-            />
-          ))
-        ) : (
-          <Center mt={5}>
-            <Text as="p" color="gray.500">
-              No projects yet! Plz add with that red add button
-            </Text>
+      {isLoading ? (
+        <Center mt={8}>
+          <Spinner />
+        </Center>
+      ) : (
+        <>
+          <Center>
+            <Heading as="h1"> All Projects </Heading>
           </Center>
-        )}
-      </SimpleGrid>
+          <SimpleGrid minChildWidth="250px" spacing="40px" mt={2}>
+            {/* card */}
+            {allProjectData.length > 0 ? (
+              allProjectData.map((project) => (
+                <Card
+                  key={project.id}
+                  pTitle={project.project_title}
+                  pDescription={project.project_description}
+                  pid={project.id}
+                  studentAllowed={project.number_of_students_allowed}
+                  groupAllowed={project.number_of_groups_allowed}
+                />
+              ))
+            ) : (
+              <Center mt={5}>
+                <Text as="p" color="gray.500">
+                  No projects yet! Plz add with that red add button
+                </Text>
+              </Center>
+            )}
+          </SimpleGrid>
+        </>
+      )}
 
       {/* Add button */}
       <Tooltip hasArrow label="Add Project" bg="gray.300" color="black">

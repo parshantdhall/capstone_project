@@ -40,6 +40,14 @@
       "via": "project_forms",
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "student_groups_priorities": {
+      "via": "project_priorities",
+      "collection": "student-group"
+    },
+    "allocated_student_groups": {
+      "via": "project_allocated",
+      "collection": "student-group"
     }
   }
 }

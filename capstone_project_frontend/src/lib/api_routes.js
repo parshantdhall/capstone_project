@@ -22,3 +22,8 @@ export const get_project_form = {
   url: "http://localhost:1337/project-forms",
   method: "GET",
 };
+
+export const get_student_group = {
+  url: "http://localhost:1337/student-groups",
+  method: "GET",
+};

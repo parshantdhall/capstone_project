@@ -70,6 +70,10 @@
     "project_forms": {
       "collection": "project-form",
       "via": "user"
+    },
+    "student_group": {
+      "via": "group_members",
+      "model": "student-group"
     }
   }
 }
