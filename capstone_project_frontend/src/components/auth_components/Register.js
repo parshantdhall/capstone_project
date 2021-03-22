@@ -82,18 +82,6 @@ const Register = () => {
         // setting the jwt token in local storage for sign in
         window && window.sessionStorage.clear();
         window && window.sessionStorage.setItem("token", data && data.jwt);
-        // setting user info in session storage
-        window &&
-          window.sessionStorage.setItem(
-            "uInfo",
-            data &&
-              JSON.stringify({
-                confirmed: data.user.confirmed,
-                username: data.user.username,
-                role: { name: data.user.role.name },
-                id: data.user.id,
-              })
-          );
 
         // setting global userState
         globalUserState.updateGlobalUserData({
@@ -185,7 +173,7 @@ const Register = () => {
             <InputGroup>
               <InputLeftAddon children="u" />
               <Input
-                type="text"
+                type="number"
                 required
                 value={userData.email}
                 onChange={(e) => {

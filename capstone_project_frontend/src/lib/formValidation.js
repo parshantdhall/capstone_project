@@ -11,6 +11,7 @@ export const validateRegister = (dataToValidate) => {
       message: "All fields are necessary",
     };
   }
+
   if (dataToValidate.password.length < 8) {
     return {
       isError: true,

@@ -12,9 +12,9 @@
   },
   "attributes": {
     "group_members": {
+      "via": "student_group",
       "plugin": "users-permissions",
-      "collection": "user",
-      "via": "student_group"
+      "collection": "user"
     },
     "is_project_priorities_submitted": {
       "type": "boolean",

@@ -72,8 +72,12 @@
       "via": "user"
     },
     "student_group": {
-      "via": "group_members",
-      "model": "student-group"
+      "model": "student-group",
+      "via": "group_members"
+    },
+    "have_group": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

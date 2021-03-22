@@ -13,6 +13,7 @@ import {
   Textarea,
   Button,
   useToast,
+  CircularProgress,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useRef, useState } from "react";
@@ -40,6 +41,12 @@ const AddProjectForm = ({ isOpen, onClose, updateProjectData }) => {
     isShowing: false,
     title: "",
   });
+
+  const [uploadPercent, setUploadPercent] = useState({
+    percent: 10,
+    showing: false,
+  });
+
   // -----------global variables------------
   const firstField = useRef();
   const toast = useToast();
@@ -90,14 +97,34 @@ const AddProjectForm = ({ isOpen, onClose, updateProjectData }) => {
             window && window.sessionStorage.getItem("token")
           }`,
         },
+        onUploadProgress: (progressEvent) => {
+          setUploadPercent((prevState) => ({
+            ...prevState,
+            showing: true,
+          }));
+          // this is to get the file upload progress
+          const { loaded, total } = progressEvent;
+          let percent = Math.floor((loaded * 100) / total);
+          setUploadPercent((prevState) => ({
+            ...prevState,
+            percent,
+          }));
+        },
       });
-      console.dir(res.data[0]);
+      console.dir(res);
       setFormData((prevState) => ({
         ...prevState,
         project_file: res.data[0],
       }));
     } catch (err) {
-      console.dir(err.response.data.data.errors[0]);
+      if (err.response) {
+        console.dir(err.response.data.data.errors[0]);
+      }
+      console.dir(err);
+      setUploadPercent(() => ({
+        percent: 10,
+        showing: false,
+      }));
     }
   };
 
@@ -243,9 +270,21 @@ const AddProjectForm = ({ isOpen, onClose, updateProjectData }) => {
                   size="sm"
                   colorScheme="teal"
                   onClick={(e) => handleFileUpload(e)}
+                  isDisabled={uploadPercent.showing}
                 >
                   upload
                 </Button>
+                {uploadPercent.showing ? (
+                  <CircularProgress
+                    ml={2}
+                    value={uploadPercent.percent}
+                    color="green.400"
+                    size="35px"
+                    thickness="6px"
+                  />
+                ) : (
+                  ""
+                )}
               </Box>
             </Stack>
           </DrawerBody>
