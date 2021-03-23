@@ -14,7 +14,7 @@ import {
   Accordion,
   Button,
 } from "@chakra-ui/react";
-import { get_project_form } from "../../../lib/api_routes";
+import { backEndUrl, get_project_form } from "../../../lib/api_routes";
 import { useHistory } from "react-router-dom";
 import {
   FaLongArrowAltLeft,
@@ -92,20 +92,22 @@ const SingleCardPage = ({ match }) => {
                 </Tag>
               </HStack>
               {projectData.project_file ? (
-                <Button
-                  mt={2}
-                  rightIcon={<FaFileDownload />}
-                  colorScheme="pink"
+                <a
+                  href={`${backEndUrl}${
+                    projectData.project_file && projectData.project_file.url
+                  }`}
+                  target="_blank"
+                  rel="noreferrer"
+                  download
                 >
-                  <a
-                    href={`http://localhost:1337${
-                      projectData.project_file && projectData.project_file.url
-                    }`}
-                    download
+                  <Button
+                    mt={2}
+                    rightIcon={<FaFileDownload />}
+                    colorScheme="pink"
                   >
                     Download Project file
-                  </a>
-                </Button>
+                  </Button>
+                </a>
               ) : (
                 <Text as="p" color="gray.500" mt={2}>
                   No Project File Uploaded

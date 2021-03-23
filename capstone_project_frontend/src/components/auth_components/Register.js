@@ -76,9 +76,8 @@ const Register = () => {
         username: userData.first_name + " " + userData.last_name,
       });
       const { data } = res;
-
       // If everything gone well
-      if (res.statusText === "OK") {
+      if (res.status === 200) {
         // setting the jwt token in local storage for sign in
         window && window.sessionStorage.clear();
         window && window.sessionStorage.setItem("token", data && data.jwt);

@@ -1,22 +1,32 @@
-import { Box, Button, Center, Heading, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Container,
+  Heading,
+  useToast,
+  Spinner,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaMagic } from "react-icons/fa";
 import allocateProjectFunction from "../../lib/allocateProjectFunction";
 import { get_project_form, get_student_group } from "../../lib/api_routes";
+import GroupAllocatedTable from "./dash components/GroupAllocatedTable";
 
 const TeacherDash = () => {
   // -----------Local States-----------
   const [groupsList, setGroupsList] = useState([]);
   const [projectsList, setProjectsList] = useState([]);
   const [isAllocBtnLoading, setIsAllocBtnLoading] = useState(false);
-  const [allocatedData, setAllocatedData] = useState([]);
+  const [isPageLoading, setIsPageLoading] = useState(false);
 
   // ----------Other var----------
   const toast = useToast();
 
   // ---Function to fetch stuff--
   const fetchStuff = async () => {
+    setIsPageLoading(true);
     try {
       const allProjects = await (
         await axios.get(get_project_form.url, get_project_form.requestHeader)
@@ -27,8 +37,10 @@ const TeacherDash = () => {
 
       setGroupsList(allGroups);
       setProjectsList(allProjects);
+      setIsPageLoading(false);
     } catch (err) {
       console.dir(err.response);
+      setIsPageLoading(false);
     }
   };
 
@@ -60,7 +72,8 @@ const TeacherDash = () => {
       const updatedRes = (await Promise.all(promiseList)).map(
         (res) => res.data
       );
-      setAllocatedData(updatedRes);
+      console.dir(updatedRes);
+      setGroupsList((prevState) => [...prevState, ...updatedRes]);
       setIsAllocBtnLoading(false);
       toast({
         title: "Project Allocation Done Sucessfully",
@@ -80,6 +93,14 @@ const TeacherDash = () => {
       console.dir(err.message || err.response);
     }
   };
+
+  const allocatedGroupData =
+    groupsList.length > 0 &&
+    groupsList.filter((group) => group.is_project_allocated);
+
+  const unAllocatedGroupData =
+    groupsList.length > 0 &&
+    groupsList.filter((group) => !group.is_project_allocated);
   return (
     <Box as="section">
       {/* -------Header--------- */}
@@ -88,18 +109,31 @@ const TeacherDash = () => {
           Teacher Dashboard
         </Heading>
       </Center>
-      {/* -------Content body----------- */}
-      <Box>
-        <Button
-          colorScheme="orange"
-          rightIcon={<FaMagic />}
-          m={2}
-          isLoading={isAllocBtnLoading}
-          onClick={handleAllocation}
-        >
-          Allocate Projects
-        </Button>
-      </Box>
+      {isPageLoading ? (
+        <Center mt={8}>
+          <Spinner />
+        </Center>
+      ) : (
+        // ----------Content ------------
+        <Container role="Section content" maxW="container.lg">
+          {/* -----Table-------- */}
+          <Button
+            colorScheme="orange"
+            rightIcon={<FaMagic />}
+            m={2}
+            isLoading={isAllocBtnLoading}
+            onClick={handleAllocation}
+          >
+            Allocate Projects
+          </Button>
+          <Box boxShadow="lg" borderRadius="lg">
+            <GroupAllocatedTable groupsList={allocatedGroupData} />
+          </Box>
+          <Box mt={5} boxShadow="lg" borderRadius="lg">
+            <GroupAllocatedTable groupsList={unAllocatedGroupData} />
+          </Box>
+        </Container>
+      )}
     </Box>
   );
 };

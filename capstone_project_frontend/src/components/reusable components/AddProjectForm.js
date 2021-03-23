@@ -111,14 +111,14 @@ const AddProjectForm = ({ isOpen, onClose, updateProjectData }) => {
           }));
         },
       });
-      console.dir(res);
+      // console.dir(res);
       setFormData((prevState) => ({
         ...prevState,
         project_file: res.data[0],
       }));
     } catch (err) {
       if (err.response) {
-        console.dir(err.response.data.data.errors[0]);
+        console.dir(err.response.data.data && err.response.data.data.errors[0]);
       }
       console.dir(err);
       setUploadPercent(() => ({
@@ -150,7 +150,7 @@ const AddProjectForm = ({ isOpen, onClose, updateProjectData }) => {
         },
       });
       // If everything gone well
-      if (res.status === 200 && res.statusText === "OK") {
+      if (res.status === 200) {
         // reset the Local State
         setFormData({
           project_title: "",
@@ -263,7 +263,7 @@ const AddProjectForm = ({ isOpen, onClose, updateProjectData }) => {
                   id="project file"
                   type="file"
                   onChange={(e) => handleFileChange(e)}
-                  p={2}
+                  p="4px"
                   mb={2}
                 />
                 <Button

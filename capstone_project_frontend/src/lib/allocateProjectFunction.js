@@ -60,7 +60,6 @@ const allocateProjectFunction = (projectsList, groupsList) => {
     return { allocatedGroup, notAllocatedGroup };
   });
 
-  console.dir(allocatedData);
   return allocatedData;
 };
 

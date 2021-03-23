@@ -68,9 +68,8 @@ const Login = () => {
         identifier,
       });
       const { data } = res;
-
       // If everything gone well
-      if (res.statusText === "OK") {
+      if (res.status === 200) {
         // check if user is confirmed or not
         if (res.data.user && res.data.user.confirmed === true) {
           // setting the jwt token in local storage for sign in
@@ -105,7 +104,7 @@ const Login = () => {
       }
     } catch (err) {
       const errorTitle =
-        err.response && err.response.data
+        err.response && err.response.data && err.response.data.data[0]
           ? err.response.data.data[0].messages[0].message
           : err.message;
       setError({

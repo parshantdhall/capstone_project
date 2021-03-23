@@ -13,7 +13,7 @@ import {
   Text,
   Button,
 } from "@chakra-ui/react";
-import { get_project_form } from "../../../lib/api_routes";
+import { backEndUrl, get_project_form } from "../../../lib/api_routes";
 import { useHistory } from "react-router-dom";
 import { FaLongArrowAltLeft, FaFileDownload } from "react-icons/fa";
 
@@ -82,16 +82,22 @@ const SingleProjectPage = ({ match }) => {
               </Tag>
             </HStack>
             {projectData.project_file ? (
-              <Button mt={2} rightIcon={<FaFileDownload />} colorScheme="pink">
-                <a
-                  href={`http://localhost:1337${
-                    projectData.project_file && projectData.project_file.url
-                  }`}
-                  download
+              <a
+                href={`${backEndUrl}${
+                  projectData.project_file && projectData.project_file.url
+                }`}
+                target="_blank"
+                rel="noreferrer"
+                download
+              >
+                <Button
+                  mt={2}
+                  rightIcon={<FaFileDownload />}
+                  colorScheme="pink"
                 >
                   Download Project file
-                </a>
-              </Button>
+                </Button>
+              </a>
             ) : (
               <Text as="p" color="gray.500" mt={2}>
                 No Project File Uploaded

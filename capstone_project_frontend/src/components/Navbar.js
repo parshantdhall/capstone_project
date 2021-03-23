@@ -23,7 +23,7 @@ const Navbar = () => {
     // removing user from global state and local storate
     globalUserData.updateGlobalUserData({});
     window && window.sessionStorage.clear();
-    history.push("/login");
+    history.replace("/login");
   };
 
   return (

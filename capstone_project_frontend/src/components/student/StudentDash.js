@@ -75,7 +75,7 @@ const StudentDash = () => {
         get_student_group.requestHeader
       );
 
-      if (res.statusText === "OK") {
+      if (res.status === 200) {
         setStudentGroupData(res.data);
         // update user to have group
         const updateUserRes = await axios.put(
@@ -85,7 +85,7 @@ const StudentDash = () => {
           },
           user_route.requestHeader
         );
-        if (updateUserRes.statusText === "OK") {
+        if (updateUserRes.status === 200) {
           updateGlobalUserData({ ...userData, have_group: true });
 
           // setting btn loading to false
@@ -124,7 +124,7 @@ const StudentDash = () => {
         },
         user_route.requestHeader
       );
-      if (res.statusText === "OK") {
+      if (res.status === 200) {
         // Updating user state locally
         updateGlobalUserData({
           ...userData,
@@ -164,7 +164,7 @@ const StudentDash = () => {
         },
         user_route.requestHeader
       );
-      if (res.statusText === "OK") {
+      if (res.status === 200) {
         // Updating user state locally
         updateGlobalUserData({
           ...userData,
