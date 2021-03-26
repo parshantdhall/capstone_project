@@ -37,7 +37,8 @@ module.exports = {
       "user.id": ctx.state.user.id,
     });
 
-    if (!project) {
+    // here it will check if the user try to edit the the same who create it or the user is teacher.
+    if (!project && ctx.state.user.role.name !== "Teacher") {
       return ctx.unauthorized(`You can't update this entry`);
     }
 

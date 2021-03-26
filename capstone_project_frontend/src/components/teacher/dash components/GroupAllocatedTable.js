@@ -19,9 +19,9 @@ const GroupAllocatedTable = ({ groupsList }) => {
             color={
               groupsList.length > 0 &&
               groupsList[0].is_project_allocated !== undefined &&
-              !groupsList[0].is_project_allocated
-                ? "red.400"
-                : "green.400"
+              groupsList[0].is_project_allocated
+                ? "green.400"
+                : "red.400"
             }
           >
             Group Id
@@ -30,9 +30,9 @@ const GroupAllocatedTable = ({ groupsList }) => {
             color={
               groupsList.length > 0 &&
               groupsList[0].is_project_allocated !== undefined &&
-              !groupsList[0].is_project_allocated
-                ? "red.400"
-                : "green.400"
+              groupsList[0].is_project_allocated
+                ? "green.400"
+                : "red.400"
             }
           >
             Group Members
@@ -42,9 +42,9 @@ const GroupAllocatedTable = ({ groupsList }) => {
             color={
               groupsList.length > 0 &&
               groupsList[0].is_project_allocated !== undefined &&
-              !groupsList[0].is_project_allocated
-                ? "red.400"
-                : "green.400"
+              groupsList[0].is_project_allocated
+                ? "green.400"
+                : "red.400"
             }
           >
             Allocated project Id

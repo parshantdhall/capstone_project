@@ -533,7 +533,8 @@
           "project_title",
           "project_description",
           "number_of_groups_allowed",
-          "number_of_students_allowed"
+          "number_of_students_allowed",
+          "num_of_groups_left_to_alloc"
         ],
         "properties": {
           "id": {
@@ -769,6 +770,9 @@
               }
             }
           },
+          "num_of_groups_left_to_alloc": {
+            "type": "integer"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -780,7 +784,8 @@
           "project_title",
           "project_description",
           "number_of_groups_allowed",
-          "number_of_students_allowed"
+          "number_of_students_allowed",
+          "num_of_groups_left_to_alloc"
         ],
         "properties": {
           "project_title": {
@@ -809,6 +814,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "num_of_groups_left_to_alloc": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",

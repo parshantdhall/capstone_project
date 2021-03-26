@@ -1,0 +1,22 @@
+---
+application:
+  name: "capstone-backend"
+  project: "capstone project"
+  organization: "QoveryCommunity"
+  publicly_accessible: true
+  port: 1337
+  storage:
+  - name: upload
+    type: ssd
+    size: 10GB
+    mount_point: /mnt/upload
+databases:
+- type: "POSTGRESQL"
+  name: "strapi"
+  version: "12"
+routers:
+- name: "main-capstone-backend"
+  routes:
+  - application_name: "capstone-backend"
+    paths:
+    - "/*"

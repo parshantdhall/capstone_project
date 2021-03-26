@@ -1267,7 +1267,8 @@
                 "project_title",
                 "project_description",
                 "number_of_groups_allowed",
-                "number_of_students_allowed"
+                "number_of_students_allowed",
+                "num_of_groups_left_to_alloc"
               ],
               "properties": {
                 "id": {
@@ -1302,6 +1303,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "num_of_groups_left_to_alloc": {
+                  "type": "integer"
                 },
                 "published_at": {
                   "type": "string"

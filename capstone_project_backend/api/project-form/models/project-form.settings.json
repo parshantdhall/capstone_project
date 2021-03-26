@@ -37,17 +37,21 @@
       "required": false
     },
     "user": {
-      "via": "project_forms",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "project_forms"
     },
     "student_groups_priorities": {
-      "via": "project_priorities",
-      "collection": "student-group"
+      "collection": "student-group",
+      "via": "project_priorities"
     },
     "allocated_student_groups": {
-      "via": "project_allocated",
-      "collection": "student-group"
+      "collection": "student-group",
+      "via": "project_allocated"
+    },
+    "num_of_groups_left_to_alloc": {
+      "type": "integer",
+      "required": true
     }
   }
 }

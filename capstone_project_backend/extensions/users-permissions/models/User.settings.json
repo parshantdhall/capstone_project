@@ -68,8 +68,8 @@
       "required": true
     },
     "project_forms": {
-      "collection": "project-form",
-      "via": "user"
+      "via": "user",
+      "collection": "project-form"
     },
     "student_group": {
       "model": "student-group",

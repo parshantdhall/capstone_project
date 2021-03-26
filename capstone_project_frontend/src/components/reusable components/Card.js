@@ -3,21 +3,21 @@ import { memo } from "react";
 import { Link } from "react-router-dom";
 const Card = ({ pTitle, pDescription, pid, studentAllowed, groupAllowed }) => {
   return (
-    <Link to={`/card/${pid}`}>
-      <Box
-        boxShadow="lg"
-        backgroundColor="white"
-        p={4}
-        borderRadius="lg"
-        maxW="md"
-        height="fit-content"
-        cursor="pointer"
-        _hover={{
-          transform: "translateY(-3px)",
-          transition: ".2s cubic-bezier(.17,.67,.83,.67) all",
-        }}
-        // onClick={() => handleCardClick(pid)}
-      >
+    <Box
+      boxShadow="lg"
+      backgroundColor="white"
+      p={4}
+      borderRadius="lg"
+      maxW="md"
+      height="fit-content"
+      cursor="pointer"
+      _hover={{
+        transform: "translateY(-3px)",
+        transition: ".2s cubic-bezier(.17,.67,.83,.67) all",
+      }}
+      // onClick={() => handleCardClick(pid)}
+    >
+      <Link to={`/card/${pid}`}>
         <VStack spacing="10px">
           {/* card header */}
           <Box as="header">
@@ -54,8 +54,8 @@ const Card = ({ pTitle, pDescription, pid, studentAllowed, groupAllowed }) => {
             </VStack>
           </Box>
         </VStack>
-      </Box>
-    </Link>
+      </Link>
+    </Box>
   );
 };
 

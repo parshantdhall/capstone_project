@@ -1,4 +1,6 @@
-export const backEndUrl = "https://main-capston-bby5secwvwbmzolk-gtw.qovery.io";
+export const backEndUrl = "https://main-capston-bshqj0xrqwxnrxjn-gtw.qovery.io";
+// export const backEndUrl = "http://localhost:1337";
+
 const requestHeader = {
   headers: {
     "Content-Type": "application/json",

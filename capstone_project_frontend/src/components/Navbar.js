@@ -9,6 +9,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { Link, useHistory } from "react-router-dom";
 import { userContext } from "./context provider/Context";
@@ -26,9 +27,10 @@ const Navbar = () => {
     history.replace("/login");
   };
 
+  const [isSmallScreen] = useMediaQuery("(max-width: 500px)");
   return (
     <Box p={3} width="100%" backgroundColor="gray.50" boxShadow="md" mb={3}>
-      <Flex justifyContent="center">
+      <Flex justifyContent="center" alignContent="center">
         <Box p={2}>
           <Heading size="md">UC Capstone Project</Heading>
         </Box>
@@ -44,15 +46,38 @@ const Navbar = () => {
             </MenuList>
           </Menu>
         ) : (
-          <Box>
+          <Box display="flex" justifyContent="space-around" alignItems="center">
             <Link to="/register">
-              <Button colorScheme="teal" mr="4">
+              <Button
+                colorScheme="teal"
+                m={1}
+                size={isSmallScreen ? "sm" : "md"}
+              >
                 Register
               </Button>
             </Link>
             <Link to="/login">
-              <Button colorScheme="teal">Log in</Button>
+              <Button
+                colorScheme="teal"
+                m={1}
+                size={isSmallScreen ? "sm" : "md"}
+              >
+                Log in
+              </Button>
             </Link>
+            <a
+              href="https://main-capston-bshqj0xrqwxnrxjn-gtw.qovery.io/admin"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button
+                colorScheme="teal"
+                m={1}
+                size={isSmallScreen ? "sm" : "md"}
+              >
+                Admin Login
+              </Button>
+            </a>
           </Box>
         )}
       </Flex>

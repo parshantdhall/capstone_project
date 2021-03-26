@@ -51,9 +51,11 @@ const TeacherDash = () => {
   // ---function to handle project allocation using the imported function---
   const handleAllocation = async () => {
     setIsAllocBtnLoading(true);
+    // grabbing allocated groups data
     const allocData = allocateProjectFunction(projectsList, groupsList).map(
       (item) => item.allocatedGroup
     );
+    // console.dir(allocData);
     const filteredAllocatedData = allocData.filter(
       (item) => item !== undefined
     );
@@ -72,7 +74,22 @@ const TeacherDash = () => {
       const updatedRes = (await Promise.all(promiseList)).map(
         (res) => res.data
       );
-      console.dir(updatedRes);
+      // Updating project's num of groups to allocate left
+      const projectPromiseList =
+        updatedRes.length > 0 &&
+        updatedRes.map((res) =>
+          axios.put(
+            `${get_project_form.url}/${res.project_allocated.id}`,
+            {
+              num_of_groups_left_to_alloc:
+                Number(res.project_allocated.num_of_groups_left_to_alloc) - 1,
+            },
+            get_project_form.requestHeader
+          )
+        );
+      const updateProjectsRes = (await Promise.all(projectPromiseList)).map(
+        (res) => res.data
+      );
       setGroupsList((prevState) => [...prevState, ...updatedRes]);
       setIsAllocBtnLoading(false);
       toast({
@@ -101,6 +118,7 @@ const TeacherDash = () => {
   const unAllocatedGroupData =
     groupsList.length > 0 &&
     groupsList.filter((group) => !group.is_project_allocated);
+
   return (
     <Box as="section">
       {/* -------Header--------- */}

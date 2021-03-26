@@ -141,14 +141,21 @@ const AddProjectForm = ({ isOpen, onClose, updateProjectData }) => {
       return;
     }
     try {
-      const res = await axios.post(create_project_form.url, formData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            window && window.sessionStorage.getItem("token")
-          }`,
+      const res = await axios.post(
+        create_project_form.url,
+        {
+          ...formData,
+          num_of_groups_left_to_alloc: formData.number_of_groups_allowed,
         },
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${
+              window && window.sessionStorage.getItem("token")
+            }`,
+          },
+        }
+      );
       // If everything gone well
       if (res.status === 200) {
         // reset the Local State

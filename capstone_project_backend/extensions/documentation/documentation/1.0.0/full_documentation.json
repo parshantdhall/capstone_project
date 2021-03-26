@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/13/2021 10:16:25 PM"
+    "x-generation-date": "03/24/2021 1:28:26 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3200,7 +3200,8 @@
           "project_title",
           "project_description",
           "number_of_groups_allowed",
-          "number_of_students_allowed"
+          "number_of_students_allowed",
+          "num_of_groups_left_to_alloc"
         ],
         "properties": {
           "id": {
@@ -3436,6 +3437,9 @@
               }
             }
           },
+          "num_of_groups_left_to_alloc": {
+            "type": "integer"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -3447,7 +3451,8 @@
           "project_title",
           "project_description",
           "number_of_groups_allowed",
-          "number_of_students_allowed"
+          "number_of_students_allowed",
+          "num_of_groups_left_to_alloc"
         ],
         "properties": {
           "project_title": {
@@ -3476,6 +3481,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "num_of_groups_left_to_alloc": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",
@@ -3577,7 +3585,8 @@
                 "project_title",
                 "project_description",
                 "number_of_groups_allowed",
-                "number_of_students_allowed"
+                "number_of_students_allowed",
+                "num_of_groups_left_to_alloc"
               ],
               "properties": {
                 "id": {
@@ -3613,6 +3622,9 @@
                     "type": "string"
                   }
                 },
+                "num_of_groups_left_to_alloc": {
+                  "type": "integer"
+                },
                 "published_at": {
                   "type": "string"
                 },
@@ -3635,7 +3647,8 @@
               "project_title",
               "project_description",
               "number_of_groups_allowed",
-              "number_of_students_allowed"
+              "number_of_students_allowed",
+              "num_of_groups_left_to_alloc"
             ],
             "properties": {
               "id": {
@@ -3670,6 +3683,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "num_of_groups_left_to_alloc": {
+                "type": "integer"
               },
               "published_at": {
                 "type": "string"
@@ -3973,7 +3989,8 @@
                 "project_title",
                 "project_description",
                 "number_of_groups_allowed",
-                "number_of_students_allowed"
+                "number_of_students_allowed",
+                "num_of_groups_left_to_alloc"
               ],
               "properties": {
                 "id": {
@@ -4008,6 +4025,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "num_of_groups_left_to_alloc": {
+                  "type": "integer"
                 },
                 "published_at": {
                   "type": "string"

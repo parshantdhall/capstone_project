@@ -22,8 +22,8 @@
       "required": false
     },
     "project_priorities": {
-      "collection": "project-form",
       "via": "student_groups_priorities",
+      "collection": "project-form",
       "dominant": true
     },
     "is_project_allocated": {
@@ -31,8 +31,8 @@
       "default": false
     },
     "project_allocated": {
-      "model": "project-form",
-      "via": "allocated_student_groups"
+      "via": "allocated_student_groups",
+      "model": "project-form"
     }
   }
 }

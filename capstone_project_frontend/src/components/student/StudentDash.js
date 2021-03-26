@@ -116,6 +116,26 @@ const StudentDash = () => {
     setIsPageLoading(true);
 
     try {
+      // check if there are no member left in the group it will del the group
+      const totalGMembers = studentGroupData.group_members.length;
+      if (Number(totalGMembers) <= 1) {
+        let groupId;
+        if (userData.id) {
+          if (userData.student_group !== null) {
+            groupId =
+              typeof userData.student_group === "number"
+                ? userData.student_group
+                : userData.student_group.id;
+            const delGroup = await axios.delete(
+              `${get_student_group.url}/${groupId}`,
+              get_student_group.requestHeader
+            );
+            if (delGroup.status === 200)
+              console.dir("Group Deleted due to no member left");
+          }
+        }
+      }
+      // ---Updating the user group info---
       const res = await axios.put(
         `${user_route.url}/${userData.id}`,
         {

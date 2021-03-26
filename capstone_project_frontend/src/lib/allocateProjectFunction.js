@@ -4,7 +4,7 @@ const findIndex = (arr, pId) => {
 const allocateProjectFunction = (projectsList, groupsList) => {
   let availProjects = projectsList.map((project) => ({
     id: project.id,
-    numOfGroupsAllowed: Number(project.number_of_groups_allowed),
+    numOfGroupsAllowed: Number(project.num_of_groups_left_to_alloc),
     numOfStudentsAllowed: Number(project.number_of_students_allowed),
   }));
 
