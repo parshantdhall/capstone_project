@@ -16,11 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { backEndUrl, get_project_form } from "../../../lib/api_routes";
 import { useHistory } from "react-router-dom";
-import {
-  FaLongArrowAltLeft,
-  FaPencilAlt,
-  FaFileDownload,
-} from "react-icons/fa";
+import { FaLongArrowAltLeft, FaFileDownload } from "react-icons/fa";
 import CustomAccord from "../../reusable components/CustomAccord";
 
 const SingleCardPage = ({ match }) => {
@@ -66,10 +62,10 @@ const SingleCardPage = ({ match }) => {
                 onClick={history.goBack}
                 icon={<FaLongArrowAltLeft />}
               />
-              <IconButton
+              {/* <IconButton
                 onClick={() => console.log("clicked")}
                 icon={<FaPencilAlt />}
-              />
+              /> */}
             </Flex>
             {/* -------Header--------- */}
             <Box as="header" m={2}>

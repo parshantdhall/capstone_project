@@ -37,6 +37,8 @@ const Login = () => {
 
   const [isSponser, setIsSponser] = useState(false);
 
+  const [btnState, setBtnState] = useState({ loading: false, disabled: false });
+
   // ------------------- All the global vars -------
   const history = useHistory();
 
@@ -59,6 +61,7 @@ const Login = () => {
   // Handling form submition
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setBtnState({ loading: true, disabled: true });
     const identifier = !isSponser
       ? "u" + userData.identifier + "@uni.canberra.edu.au"
       : userData.identifier;
@@ -98,6 +101,8 @@ const Login = () => {
             duration: 5000,
             isClosable: true,
           });
+
+          setBtnState({ loading: false, disabled: false });
         } else {
           throw new Error("User Not Confirmed");
         }
@@ -111,6 +116,7 @@ const Login = () => {
         isShowing: true,
         title: errorTitle,
       });
+      setBtnState({ loading: false, disabled: false });
     }
   };
 
@@ -196,7 +202,13 @@ const Login = () => {
                 name="password"
               />
             </InputGroup>
-            <Button type="submit">Submit</Button>
+            <Button
+              type="submit"
+              isLoading={btnState.loading}
+              disabled={btnState.disabled}
+            >
+              Submit
+            </Button>
             <Box>
               <Text as="p">
                 Don't have an account yet?.{" "}

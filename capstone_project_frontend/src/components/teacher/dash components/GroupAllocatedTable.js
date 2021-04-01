@@ -7,6 +7,8 @@ import {
   Td,
   OrderedList,
   ListItem,
+  Text,
+  List,
 } from "@chakra-ui/react";
 
 const GroupAllocatedTable = ({ groupsList }) => {
@@ -17,6 +19,7 @@ const GroupAllocatedTable = ({ groupsList }) => {
           <Th
             isNumeric
             color={
+              groupsList.length &&
               groupsList.length > 0 &&
               groupsList[0].is_project_allocated !== undefined &&
               groupsList[0].is_project_allocated
@@ -28,6 +31,7 @@ const GroupAllocatedTable = ({ groupsList }) => {
           </Th>
           <Th
             color={
+              groupsList.length &&
               groupsList.length > 0 &&
               groupsList[0].is_project_allocated !== undefined &&
               groupsList[0].is_project_allocated
@@ -38,8 +42,33 @@ const GroupAllocatedTable = ({ groupsList }) => {
             Group Members
           </Th>
           <Th
+            color={
+              groupsList.length &&
+              groupsList.length > 0 &&
+              groupsList[0].is_project_allocated !== undefined &&
+              groupsList[0].is_project_allocated
+                ? "green.400"
+                : "red.400"
+            }
+          >
+            Has Submitted Project Priorities
+          </Th>
+          <Th
+            color={
+              groupsList.length &&
+              groupsList.length > 0 &&
+              groupsList[0].is_project_allocated !== undefined &&
+              groupsList[0].is_project_allocated
+                ? "green.400"
+                : "red.400"
+            }
+          >
+            Project Priorities
+          </Th>
+          <Th
             isNumeric
             color={
+              groupsList.length &&
               groupsList.length > 0 &&
               groupsList[0].is_project_allocated !== undefined &&
               groupsList[0].is_project_allocated
@@ -52,7 +81,7 @@ const GroupAllocatedTable = ({ groupsList }) => {
         </Tr>
       </Thead>
       <Tbody>
-        {groupsList.length > 0 ? (
+        {groupsList.length && groupsList.length > 0 ? (
           groupsList.map((group) => (
             <Tr
               key={group.id}
@@ -74,6 +103,40 @@ const GroupAllocatedTable = ({ groupsList }) => {
                   )}
                 </OrderedList>
               </Td>
+              {/* project priorities */}
+              <Td>
+                {group.is_project_priorities_submitted !== undefined ||
+                group.is_project_priorities_submitted !== null ? (
+                  <Text as="p" textAlign="center">
+                    {group.is_project_priorities_submitted ? "yes" : "no"}
+                  </Text>
+                ) : (
+                  "not defined"
+                )}
+              </Td>
+              <Td>
+                <List>
+                  {group.project_priorities &&
+                  group.project_priorities.length > 0 ? (
+                    group.project_priorities.map((pro) => (
+                      <ListItem
+                        key={pro.id}
+                        bgColor={
+                          group.is_project_allocated &&
+                          pro.id === group.project_allocated.id
+                            ? "green.200"
+                            : ""
+                        }
+                      >
+                        {pro.project_title} - {pro.id}
+                      </ListItem>
+                    ))
+                  ) : (
+                    <p>No Project Priority Submitted!</p>
+                  )}
+                </List>
+              </Td>
+              {/* allocated project id */}
               <Td isNumeric>
                 {group.project_allocated && group.project_allocated.id
                   ? group.project_allocated.id

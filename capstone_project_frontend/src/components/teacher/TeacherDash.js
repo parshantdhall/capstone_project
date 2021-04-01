@@ -26,7 +26,6 @@ const TeacherDash = () => {
 
   // ---Function to fetch stuff--
   const fetchStuff = async () => {
-    setIsPageLoading(true);
     try {
       const allProjects = await (
         await axios.get(get_project_form.url, get_project_form.requestHeader)
@@ -40,12 +39,13 @@ const TeacherDash = () => {
       setIsPageLoading(false);
     } catch (err) {
       console.dir(err.response);
-      setIsPageLoading(false);
     }
   };
 
   useEffect(() => {
+    setIsPageLoading(true);
     fetchStuff();
+    setIsPageLoading(false);
   }, []);
 
   // ---function to handle project allocation using the imported function---
@@ -87,10 +87,11 @@ const TeacherDash = () => {
             get_project_form.requestHeader
           )
         );
-      const updateProjectsRes = (await Promise.all(projectPromiseList)).map(
-        (res) => res.data
-      );
-      setGroupsList((prevState) => [...prevState, ...updatedRes]);
+      (await Promise.all(projectPromiseList)).map((res) => res.data);
+
+      // Fetching the whole group and project data again
+      fetchStuff();
+
       setIsAllocBtnLoading(false);
       toast({
         title: "Project Allocation Done Sucessfully",

@@ -1,5 +1,5 @@
-export const backEndUrl = "https://main-capston-bshqj0xrqwxnrxjn-gtw.qovery.io";
-// export const backEndUrl = "http://localhost:1337";
+// export const backEndUrl = "https://main-capston-bshqj0xrqwxnrxjn-gtw.qovery.io";
+export const backEndUrl = "http://localhost:1337";
 
 const requestHeader = {
   headers: {

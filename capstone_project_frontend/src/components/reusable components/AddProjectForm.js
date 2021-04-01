@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import {
   Drawer,
   DrawerBody,
@@ -16,7 +17,6 @@ import {
   CircularProgress,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useRef, useState } from "react";
 import { file_upload, create_project_form } from "../../lib/api_routes";
 import {
   validateProjectForm,
@@ -125,7 +125,41 @@ const AddProjectForm = ({ isOpen, onClose, updateProjectData }) => {
         percent: 10,
         showing: false,
       }));
+      // Show the error toast
+      toast({
+        title: `There's some error uploading the file plz contact admin`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
+  };
+
+  // closing the drawer and reseting the form state
+  const closeDrawer = () => {
+    // reset the Local State
+    setFormData({
+      project_title: "",
+      project_description: "",
+      number_of_students_allowed: 0,
+      number_of_groups_allowed: 0,
+      project_file: "",
+    });
+
+    setFileData({ files: "" });
+
+    setError({
+      isShowing: false,
+      title: "",
+    });
+
+    setUploadPercent(() => ({
+      percent: 10,
+      showing: false,
+    }));
+
+    // closing the drawer
+    onClose();
   };
 
   //   handle full form submission
@@ -158,24 +192,11 @@ const AddProjectForm = ({ isOpen, onClose, updateProjectData }) => {
       );
       // If everything gone well
       if (res.status === 200) {
-        // reset the Local State
-        setFormData({
-          project_title: "",
-          project_description: "",
-          number_of_students_allowed: 0,
-          number_of_groups_allowed: 0,
-          project_file: "",
-        });
+        // reseting the estate and closing the drawer
+        closeDrawer();
 
-        setFileData({ files: "" });
-
-        setError({
-          isShowing: false,
-          title: "",
-        });
         // Update the Project data and close the drawer
         updateProjectData(res.data);
-        onClose();
         // Show the sucess toast
         toast({
           title: `Project ${res.data.project_title} created successfully`,
@@ -186,6 +207,13 @@ const AddProjectForm = ({ isOpen, onClose, updateProjectData }) => {
       }
     } catch (err) {
       console.dir(err);
+      // Show the sucess toast
+      toast({
+        title: `Err there's some error creating the project. Plz contact admin`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
@@ -193,7 +221,7 @@ const AddProjectForm = ({ isOpen, onClose, updateProjectData }) => {
     <Drawer
       isOpen={isOpen}
       placement="right"
-      onClose={onClose}
+      onClose={closeDrawer}
       initialFocusRef={firstField}
       size="lg"
     >
@@ -285,6 +313,7 @@ const AddProjectForm = ({ isOpen, onClose, updateProjectData }) => {
                   <CircularProgress
                     ml={2}
                     value={uploadPercent.percent}
+                    aria-valuenow={uploadPercent.percent}
                     color="green.400"
                     size="35px"
                     thickness="6px"

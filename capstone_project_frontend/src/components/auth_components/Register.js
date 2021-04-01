@@ -37,6 +37,8 @@ const Register = () => {
     title: "",
   });
 
+  const [btnState, setBtnState] = useState({ loading: false, disabled: false });
+
   // ------------Glocal var-----------------
   // HIstory var from react router
   const history = useHistory();
@@ -58,6 +60,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setBtnState({ loading: true, disabled: true });
     // Form validation
     const { isError, message } = validateRegister(userData);
     if (isError) {
@@ -65,6 +68,7 @@ const Register = () => {
         isShowing: isError,
         title: message,
       });
+      setBtnState({ loading: false, disabled: false });
       return;
     }
 
@@ -95,6 +99,8 @@ const Register = () => {
           email: "",
           password: "",
         });
+        setBtnState({ loading: false, disabled: false });
+
         // redirecting
         history.replace("/");
 
@@ -116,6 +122,7 @@ const Register = () => {
         isShowing: true,
         title: errorTitle,
       });
+      setBtnState({ loading: false, disabled: false });
     }
   };
   return (
@@ -196,7 +203,13 @@ const Register = () => {
                 name="password"
               />
             </InputGroup>
-            <Button type="submit">Submit</Button>
+            <Button
+              type="submit"
+              isLoading={btnState.loading}
+              disabled={btnState.disabled}
+            >
+              Submit
+            </Button>
             <Box>
               <Text as="p">
                 Already have an account.{" "}
