@@ -3,6 +3,8 @@ import Login from "../components/auth_components/Login";
 import Register from "../components/auth_components/Register";
 import SingleCardPage from "../components/sponser components/pages/SingleCardPage";
 import SingleProjectPage from "../components/student/pages/SingleProjectPage";
+import ProjectSummary from "../components/teacher/pages/ProjectSummary";
+import AllocateSupervisor from "../components/teacher/pages/AllocateSupervisor";
 
 export const routes = [
   {
@@ -50,5 +52,23 @@ export const routes = [
     role: "student",
     access: "private",
     id: 5,
+  },
+  {
+    path: "/teacher/project-summary",
+    name: "Shows the summary of projects in a table form",
+    desc: "Shows the summary of projects in a table form",
+    component: ProjectSummary,
+    role: "teacher",
+    access: "private",
+    id: 6,
+  },
+  {
+    path: "/teacher/allocate-supervisor",
+    name: "Allocate project supervisor page",
+    desc: "Allocate project supervisor page",
+    component: AllocateSupervisor,
+    role: "teacher",
+    access: "private",
+    id: 7,
   },
 ];

@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { userContext } from "./components/context provider/Context";
 import SponserDash from "./components/sponser components/SponserDash";
 import StudentDash from "./components/student/StudentDash";
+import SupervisorDash from "./components/supervisor/supervisorDash";
 import TeacherDash from "./components/teacher/TeacherDash";
 
 function Home() {
@@ -18,6 +19,8 @@ function Home() {
       return <StudentDash />;
     case "Teacher":
       return <TeacherDash />;
+    case "Supervisor":
+      return <SupervisorDash />;
     default:
       return <Redirect to="/" />;
   }

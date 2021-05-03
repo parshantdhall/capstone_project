@@ -14,6 +14,7 @@ import {
 import { Link, useHistory } from "react-router-dom";
 import { userContext } from "./context provider/Context";
 import { FaAngleDown } from "react-icons/fa";
+import { backEndUrl } from "../lib/api_routes";
 
 const Navbar = () => {
   const globalUserData = useContext(userContext);
@@ -29,7 +30,7 @@ const Navbar = () => {
 
   const [isSmallScreen] = useMediaQuery("(max-width: 500px)");
   return (
-    <Box p={3} width="100%" backgroundColor="gray.50" boxShadow="md" mb={3}>
+    <Box p={3} width="100%" backgroundColor="gray.50" boxShadow="md">
       <Flex justifyContent="center" alignContent="center">
         <Box p={2}>
           <Heading size="md">UC Capstone Project</Heading>
@@ -39,7 +40,7 @@ const Navbar = () => {
           <Menu>
             <MenuButton as={Button} rightIcon={<FaAngleDown />}>
               {" "}
-              Yo {globalUserData.userData.username}
+              {globalUserData.userData.username}
             </MenuButton>
             <MenuList>
               <MenuItem onClick={handleLogOut}>LogOut</MenuItem>
@@ -65,11 +66,7 @@ const Navbar = () => {
                 Log in
               </Button>
             </Link>
-            <a
-              href="https://main-capston-bshqj0xrqwxnrxjn-gtw.qovery.io/admin"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={`${backEndUrl}/admin`} target="_blank" rel="noreferrer">
               <Button
                 colorScheme="teal"
                 m={1}

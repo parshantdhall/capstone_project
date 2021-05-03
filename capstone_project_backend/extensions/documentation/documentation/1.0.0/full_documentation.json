@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/24/2021 1:28:26 PM"
+    "x-generation-date": "04/02/2021 10:18:34 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3343,6 +3343,12 @@
               "have_group": {
                 "type": "boolean"
               },
+              "supervising_projects": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -3440,6 +3446,77 @@
           "num_of_groups_left_to_alloc": {
             "type": "integer"
           },
+          "project_supervisor": {
+            "required": [
+              "id",
+              "username",
+              "email",
+              "first_name",
+              "last_name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "first_name": {
+                "type": "string"
+              },
+              "last_name": {
+                "type": "string"
+              },
+              "project_forms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "student_group": {
+                "type": "string"
+              },
+              "have_group": {
+                "type": "boolean"
+              },
+              "supervising_projects": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -3484,6 +3561,9 @@
           },
           "num_of_groups_left_to_alloc": {
             "type": "integer"
+          },
+          "project_supervisor": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -3564,6 +3644,12 @@
                 "have_group": {
                   "type": "boolean"
                 },
+                "supervising_projects": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -3624,6 +3710,9 @@
                 },
                 "num_of_groups_left_to_alloc": {
                   "type": "integer"
+                },
+                "project_supervisor": {
+                  "type": "string"
                 },
                 "published_at": {
                   "type": "string"
@@ -3686,6 +3775,9 @@
               },
               "num_of_groups_left_to_alloc": {
                 "type": "integer"
+              },
+              "project_supervisor": {
+                "type": "string"
               },
               "published_at": {
                 "type": "string"
@@ -3860,6 +3952,12 @@
                 "have_group": {
                   "type": "boolean"
                 },
+                "supervising_projects": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -4029,6 +4127,9 @@
                 "num_of_groups_left_to_alloc": {
                   "type": "integer"
                 },
+                "project_supervisor": {
+                  "type": "string"
+                },
                 "published_at": {
                   "type": "string"
                 },
@@ -4084,6 +4185,69 @@
           "have_group": {
             "type": "boolean",
             "default": false
+          },
+          "supervising_projects": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "project_title",
+                "project_description",
+                "number_of_groups_allowed",
+                "number_of_students_allowed",
+                "num_of_groups_left_to_alloc"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "project_title": {
+                  "type": "string"
+                },
+                "project_description": {
+                  "type": "string"
+                },
+                "number_of_groups_allowed": {
+                  "type": "integer"
+                },
+                "number_of_students_allowed": {
+                  "type": "integer"
+                },
+                "project_file": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "student_groups_priorities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "allocated_student_groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "num_of_groups_left_to_alloc": {
+                  "type": "integer"
+                },
+                "project_supervisor": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -4146,6 +4310,12 @@
           "have_group": {
             "type": "boolean",
             "default": false
+          },
+          "supervising_projects": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

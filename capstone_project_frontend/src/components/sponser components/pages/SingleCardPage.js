@@ -56,7 +56,13 @@ const SingleCardPage = ({ match }) => {
         </Center>
       ) : (
         <>
-          <Container boxShadow="xl" backgroundColor="white" maxW="container.md">
+          <Container
+            boxShadow="xl"
+            backgroundColor="white"
+            maxW="container.md"
+            mt={3}
+            p={2}
+          >
             <Flex justifyContent="space-between" w="100%" alignItems="center">
               <IconButton
                 onClick={history.goBack}
@@ -109,6 +115,24 @@ const SingleCardPage = ({ match }) => {
                   No Project File Uploaded
                 </Text>
               )}
+            </Box>
+            {/* -------Sponser info-------- */}
+            <Box
+              m={1}
+              p={2}
+              borderLeft="5px solid"
+              borderColor="gray.200 "
+              background="gray.100"
+            >
+              <Heading as="h3" fontSize="md">
+                Sponser
+              </Heading>
+              <Text as="em" display="block">
+                {projectData && projectData.user && projectData.user.username}
+              </Text>
+              <Text as="em">
+                {projectData && projectData.user && projectData.user.email}
+              </Text>
             </Box>
           </Container>
           {/* --------Allocated Groups accordian---------------- */}

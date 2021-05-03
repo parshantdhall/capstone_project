@@ -259,7 +259,7 @@ const StudentDash = () => {
 
   // -----rendering componenets----------
   return (
-    <Box as="section" p={4}>
+    <Box as="section" p={4} mt={3}>
       {/* Header */}
       <Box as="header">
         <Text

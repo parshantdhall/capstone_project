@@ -54,7 +54,12 @@ const SingleProjectPage = ({ match }) => {
           <Spinner />
         </Center>
       ) : (
-        <Container boxShadow="xl" backgroundColor="white" maxW="container.md">
+        <Container
+          boxShadow="xl"
+          backgroundColor="white"
+          maxW="container.md"
+          mt={5}
+        >
           <Flex justifyContent="space-between" w="100%" alignItems="center">
             <IconButton
               onClick={history.goBack}
@@ -119,6 +124,30 @@ const SingleProjectPage = ({ match }) => {
               </Text>
               <Text as="em">
                 {projectData && projectData.user && projectData.user.email}
+              </Text>
+            </Box>
+
+            {/* ----------Supervisor Info------- */}
+            <Box
+              mt={2}
+              p={3}
+              borderLeft="5px solid"
+              borderColor="gray.200 "
+              background="gray.100"
+              color="red.400"
+            >
+              <Heading as="h3" fontSize="md">
+                Supervisor
+              </Heading>
+              <Text as="em" display="block">
+                {projectData && projectData.project_supervisor
+                  ? projectData.project_supervisor.username
+                  : "No Supervisor has been allocated to this project yet"}
+              </Text>
+              <Text as="em">
+                {projectData && projectData.project_supervisor
+                  ? projectData.project_supervisor.email
+                  : ""}
               </Text>
             </Box>
           </Box>

@@ -326,10 +326,22 @@ const AddProjectForm = ({ isOpen, onClose, updateProjectData }) => {
           </DrawerBody>
 
           <DrawerFooter borderTopWidth="1px">
-            <Button variant="outline" mr={3} onClick={onClose}>
+            <Button variant="outline" mr={3} onClick={closeDrawer}>
               Cancel
             </Button>
-            <Button colorScheme="blue" onClick={handleSubmit}>
+            <Button
+              colorScheme="blue"
+              onClick={handleSubmit}
+              isDisabled={
+                formData.project_title === "" ||
+                formData.project_description === "" ||
+                formData.number_of_students_allowed <= 0 ||
+                formData.number_of_groups_allowed <= 0 ||
+                formData.project_file === ""
+                  ? true
+                  : false
+              }
+            >
               Submit
             </Button>
           </DrawerFooter>

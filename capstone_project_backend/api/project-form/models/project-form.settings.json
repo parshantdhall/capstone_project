@@ -52,6 +52,11 @@
     "num_of_groups_left_to_alloc": {
       "type": "integer",
       "required": true
+    },
+    "project_supervisor": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "supervising_projects"
     }
   }
 }

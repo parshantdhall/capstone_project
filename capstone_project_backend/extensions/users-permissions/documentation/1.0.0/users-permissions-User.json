@@ -1307,6 +1307,9 @@
                 "num_of_groups_left_to_alloc": {
                   "type": "integer"
                 },
+                "project_supervisor": {
+                  "type": "string"
+                },
                 "published_at": {
                   "type": "string"
                 },
@@ -1362,6 +1365,69 @@
           "have_group": {
             "type": "boolean",
             "default": false
+          },
+          "supervising_projects": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "project_title",
+                "project_description",
+                "number_of_groups_allowed",
+                "number_of_students_allowed",
+                "num_of_groups_left_to_alloc"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "project_title": {
+                  "type": "string"
+                },
+                "project_description": {
+                  "type": "string"
+                },
+                "number_of_groups_allowed": {
+                  "type": "integer"
+                },
+                "number_of_students_allowed": {
+                  "type": "integer"
+                },
+                "project_file": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "student_groups_priorities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "allocated_student_groups": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "num_of_groups_left_to_alloc": {
+                  "type": "integer"
+                },
+                "project_supervisor": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1424,6 +1490,12 @@
           "have_group": {
             "type": "boolean",
             "default": false
+          },
+          "supervising_projects": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

@@ -581,6 +581,12 @@
                 "have_group": {
                   "type": "boolean"
                 },
+                "supervising_projects": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },

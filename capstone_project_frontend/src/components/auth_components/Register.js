@@ -126,102 +126,110 @@ const Register = () => {
     }
   };
   return (
-    <Center flexDirection="column">
-      {/* Configuring the alert */}
-      {error.isShowing ? (
-        <CustomAlert type="error" alertTitle={error.title} />
-      ) : (
-        ""
-      )}
+    <Box
+      background="url(/bg.jpg)"
+      backgroundPosition="center"
+      backgroundSize="cover"
+      width="100%"
+      height="90vh"
+    >
+      <Center flexDirection="column">
+        {/* Configuring the alert */}
+        {error.isShowing ? (
+          <CustomAlert type="error" alertTitle={error.title} />
+        ) : (
+          ""
+        )}
 
-      {/* Rest of the components */}
+        {/* Rest of the components */}
 
-      <Stack spacing={4} p={2}>
-        <Box>
-          <Heading as="h1">Register Capstone Project User</Heading>
-        </Box>
-        <Spacer />
-        <Box as="form" onSubmit={handleSubmit}>
-          <Stack spacing={3}>
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                children={<FaUserCircle />}
-              />
+        <Stack spacing={4} p={2}>
+          <Box>
+            <Heading as="h1">Register Capstone Project User</Heading>
+          </Box>
+          <Spacer />
+          <Box as="form" onSubmit={handleSubmit}>
+            <Stack spacing={3}>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  children={<FaUserCircle />}
+                />
 
-              <Input
-                type="text"
-                required
-                value={userData.first_name}
-                onChange={(e) => {
-                  handleChange(e);
-                }}
-                placeholder="First Name"
-                name="first_name"
-              />
-            </InputGroup>
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                children={<FaUserCircle />}
-              />
-              <Input
-                type="text"
-                required
-                value={userData.last_name}
-                onChange={(e) => {
-                  handleChange(e);
-                }}
-                placeholder="Second Name"
-                name="last_name"
-              />
-            </InputGroup>
-            <InputGroup>
-              <InputLeftAddon children="u" />
-              <Input
-                type="number"
-                required
-                value={userData.email}
-                onChange={(e) => {
-                  handleChange(e);
-                }}
-                placeholder="UC Student ID"
-                name="email"
-              />
-              <InputRightAddon children="@uni.canberra.edu.au" />
-            </InputGroup>
-            <InputGroup>
-              <InputLeftElement pointerEvents="none" children={<FaKey />} />
-              <Input
-                type="password"
-                required
-                value={userData.password}
-                onChange={(e) => {
-                  handleChange(e);
-                }}
-                placeholder="password of your chioce"
-                name="password"
-              />
-            </InputGroup>
-            <Button
-              type="submit"
-              isLoading={btnState.loading}
-              disabled={btnState.disabled}
-            >
-              Submit
-            </Button>
-            <Box>
-              <Text as="p">
-                Already have an account.{" "}
-                <Link to="/login">
-                  <Button variant="link">Login</Button>
-                </Link>
-              </Text>
-            </Box>
-          </Stack>
-        </Box>
-      </Stack>
-    </Center>
+                <Input
+                  type="text"
+                  required
+                  value={userData.first_name}
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                  placeholder="First Name"
+                  name="first_name"
+                />
+              </InputGroup>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  children={<FaUserCircle />}
+                />
+                <Input
+                  type="text"
+                  required
+                  value={userData.last_name}
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                  placeholder="Second Name"
+                  name="last_name"
+                />
+              </InputGroup>
+              <InputGroup>
+                <InputLeftAddon children="u" />
+                <Input
+                  type="number"
+                  required
+                  value={userData.email}
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                  placeholder="UC Student ID"
+                  name="email"
+                />
+                <InputRightAddon children="@uni.canberra.edu.au" />
+              </InputGroup>
+              <InputGroup>
+                <InputLeftElement pointerEvents="none" children={<FaKey />} />
+                <Input
+                  type="password"
+                  required
+                  value={userData.password}
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                  placeholder="password of your chioce"
+                  name="password"
+                />
+              </InputGroup>
+              <Button
+                type="submit"
+                isLoading={btnState.loading}
+                disabled={btnState.disabled}
+              >
+                Submit
+              </Button>
+              <Box>
+                <Text as="p">
+                  Already have an account.{" "}
+                  <Link to="/login">
+                    <Button variant="link">Login</Button>
+                  </Link>
+                </Text>
+              </Box>
+            </Stack>
+          </Box>
+        </Stack>
+      </Center>
+    </Box>
   );
 };
 

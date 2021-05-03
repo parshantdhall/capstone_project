@@ -676,6 +676,12 @@
               "have_group": {
                 "type": "boolean"
               },
+              "supervising_projects": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -773,6 +779,77 @@
           "num_of_groups_left_to_alloc": {
             "type": "integer"
           },
+          "project_supervisor": {
+            "required": [
+              "id",
+              "username",
+              "email",
+              "first_name",
+              "last_name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "first_name": {
+                "type": "string"
+              },
+              "last_name": {
+                "type": "string"
+              },
+              "project_forms": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "student_group": {
+                "type": "string"
+              },
+              "have_group": {
+                "type": "boolean"
+              },
+              "supervising_projects": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -817,6 +894,9 @@
           },
           "num_of_groups_left_to_alloc": {
             "type": "integer"
+          },
+          "project_supervisor": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

@@ -594,6 +594,12 @@
                 "have_group": {
                   "type": "boolean"
                 },
+                "supervising_projects": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -654,6 +660,9 @@
                 },
                 "num_of_groups_left_to_alloc": {
                   "type": "integer"
+                },
+                "project_supervisor": {
+                  "type": "string"
                 },
                 "published_at": {
                   "type": "string"
@@ -716,6 +725,9 @@
               },
               "num_of_groups_left_to_alloc": {
                 "type": "integer"
+              },
+              "project_supervisor": {
+                "type": "string"
               },
               "published_at": {
                 "type": "string"

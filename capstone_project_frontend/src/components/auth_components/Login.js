@@ -124,103 +124,121 @@ const Login = () => {
     setIsSponser((prevState) => !prevState);
   };
   return (
-    <Center flexDirection="column">
-      {/* Configuring the alert */}
-      {error.isShowing ? (
-        <CustomAlert type="error" alertTitle={error.title} />
-      ) : (
-        ""
-      )}
+    <Box
+      background="url(/loginbg.jpg)"
+      backgroundPosition="center"
+      backgroundSize="cover"
+      width="100%"
+      height="90vh"
+    >
+      <Center flexDirection="column">
+        {/* Configuring the alert */}
+        {error.isShowing ? (
+          <CustomAlert type="error" alertTitle={error.title} />
+        ) : (
+          ""
+        )}
 
-      {/* Rest of the components */}
-      <Stack spacing={4} p={2}>
-        <Box>
-          <Heading as="h1">Login to your Capstone Project account</Heading>
-        </Box>
-        <Spacer />
-        <Box
-          as="form"
-          onSubmit={handleSubmit}
-          maxW="460px"
-          style={{ margin: "0 auto" }}
-        >
-          <Stack spacing={3} pos="relative">
-            {isSponser ? (
+        {/* Rest of the components */}
+        <Stack spacing={4} p={2} color="white">
+          <Box>
+            <Heading as="h1" color="white">
+              Login to your Capstone Project account
+            </Heading>
+          </Box>
+          <Spacer />
+          <Box
+            as="form"
+            onSubmit={handleSubmit}
+            maxW="460px"
+            style={{ margin: "0 auto" }}
+          >
+            <Stack spacing={3} pos="relative">
+              {isSponser ? (
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<FaEnvelope />}
+                  />
+                  <Input
+                    type="email"
+                    required
+                    value={userData.identifier}
+                    onChange={(e) => {
+                      handleChange(e);
+                    }}
+                    placeholder="Sponser Email"
+                    name="identifier"
+                  />
+                </InputGroup>
+              ) : (
+                <InputGroup>
+                  <InputLeftAddon children="u" bgColor="transparent" />
+                  <Input
+                    type="text"
+                    required
+                    value={userData.identifier}
+                    onChange={(e) => {
+                      handleChange(e);
+                    }}
+                    placeholder="UC Student ID"
+                    name="identifier"
+                  />
+                  <InputRightAddon
+                    children="@uni.canberra.edu.au"
+                    bgColor="transparent"
+                  />
+                </InputGroup>
+              )}
+              {/* Login as sponser or student */}
+              <HStack
+                fontSize="sm"
+                spacing="5px"
+                justifyContent="flex-end"
+                w="100%"
+              >
+                <Text as="p">
+                  Login as {!isSponser ? "Sponser" : "Student"}?
+                </Text>
+                <Switch onChange={handleIsSponser} />
+              </HStack>
+              {/* ------------Password---------- */}
               <InputGroup>
-                <InputLeftElement
-                  pointerEvents="none"
-                  children={<FaEnvelope />}
-                />
+                <InputLeftElement pointerEvents="none" children={<FaKey />} />
                 <Input
-                  type="email"
+                  type="password"
                   required
-                  value={userData.identifier}
+                  value={userData.password}
                   onChange={(e) => {
                     handleChange(e);
                   }}
-                  placeholder="Sponser Email"
-                  name="identifier"
+                  placeholder="password "
+                  name="password"
                 />
               </InputGroup>
-            ) : (
-              <InputGroup>
-                <InputLeftAddon children="u" />
-                <Input
-                  type="text"
-                  required
-                  value={userData.identifier}
-                  onChange={(e) => {
-                    handleChange(e);
-                  }}
-                  placeholder="UC Student ID"
-                  name="identifier"
-                />
-                <InputRightAddon children="@uni.canberra.edu.au" />
-              </InputGroup>
-            )}
-            {/* Login as sponser or student */}
-            <HStack
-              fontSize="sm"
-              spacing="5px"
-              justifyContent="flex-end"
-              w="100%"
-            >
-              <Text as="p">Login as {!isSponser ? "Sponser" : "Student"}?</Text>
-              <Switch onChange={handleIsSponser} />
-            </HStack>
-            {/* ------------Password---------- */}
-            <InputGroup>
-              <InputLeftElement pointerEvents="none" children={<FaKey />} />
-              <Input
-                type="password"
-                required
-                value={userData.password}
-                onChange={(e) => {
-                  handleChange(e);
-                }}
-                placeholder="password "
-                name="password"
-              />
-            </InputGroup>
-            <Button
-              type="submit"
-              isLoading={btnState.loading}
-              disabled={btnState.disabled}
-            >
-              Submit
-            </Button>
-            <Box>
-              <Text as="p">
-                Don't have an account yet?.{" "}
-                <Link to="/register">
-                  <Button variant="link">Register</Button>
-                </Link>
-              </Text>
-            </Box>
-          </Stack>
-        </Box>
-      </Stack>
-    </Center>
+              <Button
+                type="submit"
+                colorScheme="facebook"
+                isLoading={btnState.loading}
+                disabled={btnState.disabled}
+              >
+                Submit
+              </Button>
+              <Box>
+                <Text as="p" color="white">
+                  Don't have an account yet?{" "}
+                  <Link to="/register">
+                    <Button variant="link" color="white">
+                      Register
+                    </Button>
+                  </Link>
+                </Text>
+              </Box>
+            </Stack>
+          </Box>
+        </Stack>
+      </Center>
+    </Box>
   );
 };
 

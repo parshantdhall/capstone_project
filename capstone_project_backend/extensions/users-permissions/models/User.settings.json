@@ -78,6 +78,10 @@
     "have_group": {
       "type": "boolean",
       "default": false
+    },
+    "supervising_projects": {
+      "via": "project_supervisor",
+      "collection": "project-form"
     }
   }
 }

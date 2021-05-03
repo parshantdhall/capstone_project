@@ -1,18 +1,11 @@
-import {
-  Box,
-  Button,
-  Center,
-  Container,
-  Heading,
-  useToast,
-  Spinner,
-} from "@chakra-ui/react";
+import { Box, Button, Heading, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaMagic } from "react-icons/fa";
 import allocateProjectFunction from "../../lib/allocateProjectFunction";
 import { get_project_form, get_student_group } from "../../lib/api_routes";
 import GroupAllocatedTable from "./dash components/GroupAllocatedTable";
+import TeacherLayout from "./dash components/TeacherLayout";
 
 const TeacherDash = () => {
   // -----------Local States-----------
@@ -121,39 +114,30 @@ const TeacherDash = () => {
     groupsList.filter((group) => !group.is_project_allocated);
 
   return (
-    <Box as="section">
-      {/* -------Header--------- */}
-      <Center>
-        <Heading as="h1" fontFamily="Roboto">
-          Teacher Dashboard
-        </Heading>
-      </Center>
-      {isPageLoading ? (
-        <Center mt={8}>
-          <Spinner />
-        </Center>
-      ) : (
-        // ----------Content ------------
-        <Container role="Section content" maxW="container.lg">
-          {/* -----Table-------- */}
-          <Button
-            colorScheme="orange"
-            rightIcon={<FaMagic />}
-            m={2}
-            isLoading={isAllocBtnLoading}
-            onClick={handleAllocation}
-          >
-            Allocate Projects
-          </Button>
-          <Box boxShadow="lg" borderRadius="lg">
-            <GroupAllocatedTable groupsList={allocatedGroupData} />
-          </Box>
-          <Box mt={5} boxShadow="lg" borderRadius="lg">
-            <GroupAllocatedTable groupsList={unAllocatedGroupData} />
-          </Box>
-        </Container>
-      )}
-    </Box>
+    <TeacherLayout isPageLoading={isPageLoading} heading="Allocate Project">
+      {/* -----Table-------- */}
+      <Button
+        colorScheme="orange"
+        rightIcon={<FaMagic />}
+        m={2}
+        isLoading={isAllocBtnLoading}
+        onClick={handleAllocation}
+      >
+        Allocate Projects
+      </Button>
+      <Heading as="h2" m={2} fontSize="xl">
+        Allocated Groups
+      </Heading>
+      <Box boxShadow="lg" borderRadius="lg">
+        <GroupAllocatedTable groupsList={allocatedGroupData} />
+      </Box>
+      <Heading as="h2" m={2} fontSize="xl">
+        Unallocated Groups
+      </Heading>
+      <Box mt={5} boxShadow="lg" borderRadius="lg">
+        <GroupAllocatedTable groupsList={unAllocatedGroupData} />
+      </Box>
+    </TeacherLayout>
   );
 };
 

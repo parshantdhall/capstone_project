@@ -1,23 +1,19 @@
+import axios from "axios";
+
 import {
   Box,
   Center,
   Heading,
-  IconButton,
   SimpleGrid,
   Spinner,
   Text,
-  Tooltip,
-  useDisclosure,
 } from "@chakra-ui/react";
 import Card from "../reusable components/Card";
-import { FaPlus } from "react-icons/fa";
-import AddProjectForm from "../reusable components/AddProjectForm";
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState, useContext } from "react";
 import { get_project_form } from "../../lib/api_routes";
 import { userContext } from "../context provider/Context";
 
-const SponserDash = () => {
+const SupervisorDash = () => {
   // local state
   const [allProjectData, setAllProjectData] = useState([]);
   const [isLoading, setIsloading] = useState(false);
@@ -25,13 +21,11 @@ const SponserDash = () => {
   // ----GLobal var---------
   const globalStateData = useContext(userContext);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   useEffect(() => {
     setIsloading(true);
     axios
       .get(
-        `${get_project_form.url}?user.id=${
+        `${get_project_form.url}?project_supervisor.id=${
           globalStateData.userData.id && globalStateData.userData.id
         }`,
         {
@@ -50,12 +44,6 @@ const SponserDash = () => {
       .catch((err) => console.dir(err));
   }, [globalStateData.userData.id]);
 
-  // -------Functions---------
-  const updateProjectData = (pData) => {
-    if (pData) {
-      setAllProjectData((prevState) => [...prevState, pData]);
-    }
-  };
   return (
     <Box as="section" p={3} mt={3}>
       {isLoading ? (
@@ -65,7 +53,7 @@ const SponserDash = () => {
       ) : (
         <>
           <Center>
-            <Heading as="h1"> All Projects </Heading>
+            <Heading as="h1"> All Supervising Projects </Heading>
           </Center>
           <SimpleGrid minChildWidth="250px" spacing="40px" mt={2}>
             {/* card */}
@@ -83,36 +71,15 @@ const SponserDash = () => {
             ) : (
               <Center mt={5}>
                 <Text as="p" color="gray.500">
-                  No projects yet! Plz add with that red add button
+                  No projects to supervise yet! Plz ask teacher to add
                 </Text>
               </Center>
             )}
           </SimpleGrid>
         </>
       )}
-
-      {/* Add button */}
-      <Tooltip hasArrow label="Add Project" bg="gray.300" color="black">
-        <IconButton
-          onClick={onOpen}
-          borderRadius="full"
-          colorScheme="red"
-          aria-label="Add Project"
-          size="lg"
-          icon={<FaPlus />}
-          position="fixed"
-          right="3%"
-          bottom="8%"
-          zIndex="sticky"
-        />
-      </Tooltip>
-      <AddProjectForm
-        isOpen={isOpen}
-        onClose={onClose}
-        updateProjectData={updateProjectData}
-      />
     </Box>
   );
 };
 
-export default SponserDash;
+export default SupervisorDash;

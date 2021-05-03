@@ -4,7 +4,12 @@ export const backEndUrl = "http://localhost:1337";
 const requestHeader = {
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${window && window.sessionStorage.getItem("token")}`,
+    Authorization: `Bearer ${
+      window &&
+      window.sessionStorage.getItem("token") !== undefined &&
+      window.sessionStorage.getItem("token") !== null &&
+      window.sessionStorage.getItem("token")
+    }`,
   },
 };
 export const api_register = {

@@ -121,6 +121,11 @@ const GroupAllocatedTable = ({ groupsList }) => {
                     group.project_priorities.map((pro) => (
                       <ListItem
                         key={pro.id}
+                        textDecoration={
+                          pro.num_of_groups_left_to_alloc <= 0
+                            ? "line-through"
+                            : "none"
+                        }
                         bgColor={
                           group.is_project_allocated &&
                           pro.id === group.project_allocated.id
