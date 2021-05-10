@@ -19,7 +19,10 @@ const AllocateSupervisor = () => {
           user_route.url,
           user_route.requestHeader
         );
-        const filteredData = data.filter((user) => user.role.id === 6);
+        const filteredData = data.filter(
+          (user) => user.role.type === "supervisor"
+        );
+        console.dir(data);
         setSupervisorData(filteredData);
         setIsPageLoading(false);
       } catch (e) {
